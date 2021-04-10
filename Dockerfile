@@ -17,7 +17,7 @@ RUN pip install -r /app/requirements.txt
 #ENV FLASK_APP application.py
 
 #RUN chown -R microblog:microblog ./
-# USER microblog
+#USER microblog
 
 EXPOSE 5000
 CMD [ "python", "application.py" ]
