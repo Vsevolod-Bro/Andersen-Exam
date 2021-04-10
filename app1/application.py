@@ -5,7 +5,7 @@ application = Flask(__name__)
 
 @application.route("/")
 def index():
-    return "<h1> Hello World 1 (FLASK)</h1>"
+    return "<h1> Hello World 1 (FLASK-)</h1>"
 
 @application.route("/an")
 def an():
@@ -16,6 +16,6 @@ def user(name):
     return "<h1>User page for User: " + name + "</h1>"
 
 if __name__  == "__main__":
-    #application.debug = True
+    # application.debug = True
     application.run(host="0.0.0.0")
 
