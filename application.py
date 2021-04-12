@@ -5,7 +5,7 @@ application = Flask(__name__)
 
 @application.route("/")
 def index():
-    return "<h1> Hello World 1 (FLASK-)</h1> <br> <a href=\"/templates/anders.html\">Andersen page</a>"
+    return '<h1> Hello World 1 (FLASK-)</h1> <br> <a href="/templates/anders.html">Andersen page</a>'
 
 @application.route("/an")
 def an():
