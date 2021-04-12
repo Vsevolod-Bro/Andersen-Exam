@@ -17,32 +17,44 @@ Process:
 1. Create EC2 instance into original VPC.
 2. For configuration connected Elastic IPv4 address (later can be deleted) 
 2. SG allow port 22 to admin host in Internet for configuration. Port 3306 open for local VPC.
-3. 
+3. Install MySQL DB Server
+4. Configure access to DB
+5. Create simple DB
+
 
 **Instalation MySQL**
+```bash
 sudo wget https://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm
 sudo yum localinstall mysql57-community-release-el7-11.noarch.rpm
 sudo yum install mysql-community-server
 sudo systemctl start mysqld.service
 sudo systemctl enable mysqld.service
-# Get temporary password
+#Get temporary password
 sudo grep 'temporary password' /var/log/mysqld.log
-# Change password
+#Change password
 mysql_secure_installation
-# Open SQL console
+```
+Open SQL console
+```bash
 mysql -u root -p
 For connection other EC2 instances to DB need add IP-addresses to DB security:
-# Check from wich addresses allowed access:
+#Check from wich addresses allowed access:
 SELECT host FROM mysql.user WHERE User = 'root';
-# Add from wich address will allow access
+#Add from wich address will allow access
 CREATE USER 'root'@'ip_address' IDENTIFIED BY 'some_pass';
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'ip_address';
-# OR from anywhere:
+#OR from anywhere:
 CREATE USER 'root'@'%' IDENTIFIED BY 'some_pass';
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'%';
-# Reload permissions
+#Reload permissions
 FLUSH PRIVILEGES;
 
+#Create simple DB
+create database brvv;
+use brvv;
+create table users (id int PRIMARY KEY AUTO_INCREMENT, fst_name varchar(255), lst_name varchar(255),phone varchar(20));
+INSERT users(fst_name, lst_name, phone) VALUES ('Petr', 'Ivanov', '+79001112233'), ('second', 'Pepe', '+79002223344'), ('Sy', 'Sys', '+79003334455');
+```
 
 
 
