@@ -5,7 +5,7 @@ application = Flask(__name__)
 
 @application.route("/")
 def index():
-    return '<h1> Hello World 1 (FLASK-)</h1> <br> <a href="/an">Andersen page</a>'
+    return '<body  bgcolor = "Blue"> <h1> Hello World 1 (FLASK)</h1> <br> <a href="/an">Andersen page</a> </body>'
 
 @application.route("/an")
 def an():
