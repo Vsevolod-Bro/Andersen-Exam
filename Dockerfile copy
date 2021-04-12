@@ -1,31 +1,38 @@
-FROM php:8.0-apache
+FROM nginx:latest
 
 
 #RUN yum update -y && yum install -y initscripts;
 
 #CMD ["/usr/sbin/init"]
 
-RUN apt-get update
+#RUN apt-get update
 # && apt-get install -y 
 
-# ip-172-31-100-87.us-west-2.compute.internal
-# ;dEdp/p?i0aa
+ENV PHP_PACKAGES \
+        php\
+        php-fpm \
+        php-cli \
+        php-readline \
+        php-mysql \
+       # php-mcrypt \
+        php-xml
 
+RUN apt-get update \
+    && apt-get install -y $PHP_PACKAGES
+RUN apt-get -y install apache2     
+RUN usermod -u 1000 www-data
 
 #RUN apt-get install -y php php-fpm php-mysql php-mbstring
 #php \
 #php-fpm \
 #mysql-server \
-RUN apt-get -y install default-mysql-client
-RUN docker-php-ext-install pdo \
-        mysqli pdo_mysql
-#RUN apt-get -y install pdo_mysql
+#php-mysql
 
 #RUN yum install -y epel-release
 #RUN yum -y install sudo
 #RUN amazon-linux-extras install -y nginx1
 #RUN cd /usr/share/nginx/html; 
-RUN echo "<html><h1>This is WebServer 01</h1></html>" > /var/www/html/index.html
+RUN echo "<html><h1>This is WebServer 01</h1></html>" > /usr/share/nginx/html/index.html
 #RUN amazon-linux-extras -y install php
 #RUN yum -y install php-fpm
 #RUN cd /var/www/html
@@ -56,4 +63,4 @@ WORKDIR /var/www/html
 #RUN systemctl start nginx
 #RUN systemctl enable nginx
 
-EXPOSE 80 3306
+EXPOSE 80

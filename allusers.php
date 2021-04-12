@@ -8,11 +8,11 @@
 </head>
 <body>
 <?php
-include("/var/www/html/base.php");
-
+#include("/var/www/html/base.php");
+$dsn = 'mysql:host=172.31.100.87;port=3306;dbname=brvv';
 $db_name = 'brvv';
-$db_username =  'admin';
-$db_pass =      '*11111aa';
+$db_username =  'root';
+$db_pass =      'Smart!172';
 $dbh = new PDO($dsn, $db_username, $db_pass);
 
 
