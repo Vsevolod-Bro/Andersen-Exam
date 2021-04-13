@@ -97,4 +97,4 @@ INSERT users(fst_name, lst_name, phone) VALUES ('Petr', 'Ivanov', '+79001112233'
 5. Auto launch deploy process by the Push the code to GitHub.
 6. Implemented LifeCycle Policy for Configurations Store in AWS Elastic Beanstalk
 7. It is possible to view the log and monitor through AWS Cloud Watch and special views in Elastic Beanstalk
-8. Implemented Notifications about Code PipeLine process by AWS SNS to extereal e-Mail.
+8. Implemented Notifications about Code PipeLine process by AWS SNS to external e-Mail.
