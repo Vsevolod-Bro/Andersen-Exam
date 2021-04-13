@@ -7,9 +7,41 @@ _____________________________________________________
 
 ## Solution:
 
+The infrastructure diagram and the deployment process are reflected in the files in the folder _**Schemes**_
+
+**Technology stack:**
+1. GitHub - for code versions control
+2. AWS Elastic Beanstalk - for deploy code to Infrastructure (Docker containers)
+3. AWS CodePipeline - for implementation CI/CD process.
+
+**CI/CD process in my project implemented as follows:**
+1. Developer change the code.
+2. Run PowerShell script for first test the code in the container same as in infrastructure. Script check the Web-page accessibility (by code 200) and send message "OK" or "FAIL". After that script stop the containers and remove all containers.
+3. If the test was OK. Developer commit the changes and push they to GitHub.
+4. On the **PUSH IN THE BRANCH** of the application launches a trigger to deploy in AWS CodePipeline for this Application.
+5. The code is delivered to the working environment and run in it.
+
+
 ### Application 1:
+* Programming Language: Python (Flask)
+* Docker Image: python:3.6-alpine 
+
+
+* The application shows three pages:
+1. */*
+2. */an*
+3. */user/some_text* 
+* Application open first page - "Hello World 1" with link to second page.
+* Second page have a Picture. Also this page open as *host/an*
+* Third page *host/user/XXXX* open page for XXXX and shows on the page text like a **"User page for User: XXXX"**
+
 
 ### Application 2:
+* Programming Language: PHP
+* Docker Image:         php:8.0-apache 
+
+Application open first page with text "Hello World 2" and the Button. If you click on the button, a second page opens and it displays data about users from the test DB.
+The base (MySQL) locate on a separate EC2 and Subnet but in the same VPC.
 
 ### DataBase:
 On the EC2 instance. It is MySQL DB, Manual deployed.
@@ -57,29 +89,6 @@ INSERT users(fst_name, lst_name, phone) VALUES ('Petr', 'Ivanov', '+79001112233'
 ```
 
 
-
-2. IAM role allow access to EC2 instances for read???
-
-I did the task in Two stages:
-* In the **first** Stage, I created the main infrastructure. Then I configured EC2 to connect to the Internet through one NAT and install *nginx* from the Internet repository. Creation of *index.html* and installation of *nginx* I made in the script located in the **UserData**. This is implemented in __*aws-cf-01.yml*__
-* In the **second** Stage, I create a S3 bucket. I created in there 3 objects (folders) and will placed in there *nginx* rpm-package, *index.html* for one EC2 instance and other *index.html* for second EC2 instance. Next I created S3 EndPoint connection, remove NAT-Gateway and change the UserData in that manner it's copy and install nginx via EndPoint from S3 bucket, and also copy index.html file from S3 to a required folder. In the second stage I add the **AutoRecovery** block. For the S3 Bucket access I created Role, and modify Security Group. This is implemented in __*aws-cf-02.yml*__
-
-**Template work only for Oregon (us-west-2) because the ImageId is static**
-
-**The template do:**
-1.  Block the parameters that contains the object names, net CIDRs.
-2.  Create a VPC
-3.  Create a InternetGateway, IGW-VPC attachment and Route Table for VPC
-4.  Create route for external nets via IGW
-5.  Create Public subnets
-6.  Create Private subnets
-7.  Create RouteTables, Associations and Route for subnets
-8.  Create EndPoint
-9.  Create Security Group
-10. Create Role and Policy for S3 access via EndPoint, Instance profile for this Role
-11. Create EC2 with UserData
-12. Create ALB, ALB Listener and ALB Target Group
-13. Create AutoRecovery
 
 
 ## Results:
