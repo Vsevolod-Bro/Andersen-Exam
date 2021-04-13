@@ -16,7 +16,7 @@ The infrastructure diagram and the deployment process are reflected in the files
 
 **CI/CD process in my project implemented as follows:**
 1. Developer change the code.
-2. Run PowerShell script for first test the code in the container same as in infrastructure. Script check the Web-page accessibility (by code 200) and send message "OK" or "FAIL". After that script stop the containers and remove all containers.
+2. Run PowerShell script for first test the code in the container same as in infrastructure. Script check the Web-page accessibility (by code 200) and send message "OK" or "FAIL". After that script stops the containers and remove all containers.
 3. If the test was OK. Developer commit the changes and push they to GitHub.
 4. On the **PUSH IN THE BRANCH** of the application launches a trigger to deploy in AWS CodePipeline for this Application.
 5. The code is delivered to the working environment and run in it.
@@ -89,13 +89,12 @@ INSERT users(fst_name, lst_name, phone) VALUES ('Petr', 'Ivanov', '+79001112233'
 ```
 
 
-
-
 ## Results:
-1. Created a template for the given diagram (The one with connect to Internet via NAT, the Second with connect to S3 via EndPoint without Internet connection)
-2. Add AutoRecovery for EC2
-3. Corrected the diagram (in the folder __*Schemes*__)
-4. Azure          - not implemented
-5. Script-wrapper - not implemented (could be pass the Image ID )
-6. I want make the procedure that will get the Image ID by the Image name - not implemented
-7. Create S3-Bucket with the Code - is it needed?
+1. CI/CD process developed based on AWS Services and GitHub
+2. Developed two Application by Python and PHP languages.
+3. Two diagrams are drawn: 1. Project Infrastucure, 2. CI/CD wanted and real.
+4. Initial testing by the PowerShell script runs Docker Container locally
+5. Auto launch deploy process by the Push the code to GitHub.
+6. Implemented LifeCycle Policy for Configurations Store in AWS Elastic Beanstalk
+7. It is possible to view the log and monitor through AWS Cloud Watch and special views in Elastic Beanstalk
+8. Implemented Notifications about Code PipeLine process by AWS SNS to extereal e-Mail.
