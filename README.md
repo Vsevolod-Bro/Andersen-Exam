@@ -98,3 +98,5 @@ INSERT users(fst_name, lst_name, phone) VALUES ('Petr', 'Ivanov', '+79001112233'
 6. Implemented LifeCycle Policy for Configurations Store in AWS Elastic Beanstalk
 7. It is possible to view the log and monitor through AWS Cloud Watch and special views in Elastic Beanstalk
 8. Implemented Notifications about Code PipeLine process by AWS SNS to external e-Mail.
+9. The code linter implement by MS plugin in MS VS Code editor.
+10. Vulnerability detection implemented by Snyk on GitHub.
